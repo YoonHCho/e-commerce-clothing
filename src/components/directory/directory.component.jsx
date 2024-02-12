@@ -11,30 +11,35 @@ export class Directory extends Component {
       sections: [
         {
           id: 1,
-          title: 'HATS',
+          title: 'hats',
           imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+          linkUrl: 'hats'
         },
         {
           id: 2,
-          title: 'JACKETS',
+          title: 'jackets',
           imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
+          linkUrl: 'jackets'
         },
         {
           id: 3,
-          title: 'SNEAKERS',
+          title: 'sneakers',
           imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
+          linkUrl: 'sneakers'
         },
         {
           id: 4,
-          title: 'MENS',
+          title: 'mens',
           imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-          size: 'large'
+          size: 'large',
+          linkUrl: 'mens'
         },
         {
           id: 5,
-          title: 'WOMENS',
+          title: 'womens',
           imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-          size: 'large'
+          size: 'large',
+          linkUrl: 'womens'
         },
       ]
     }
@@ -45,8 +50,9 @@ export class Directory extends Component {
     return (
       <div className="directory-menu">
         {
-          this.state.sections.map(({ id, title, imageUrl, size }) => (
-            <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+          // ...otherProps, making it simpler since the property and parameter are the same name
+          this.state.sections.map(({ id, ...otherProps }) => (
+            <MenuItem key={id} {...otherProps} />
           ))
         }
       </div>
