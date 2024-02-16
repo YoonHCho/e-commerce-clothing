@@ -1,9 +1,13 @@
-import { HomePage } from "./pages/homepage/homepage.component";
-import { ShopPage } from "./pages/shop/shop.component";
 // Need to import BrowserRouter in the index.js first
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
+
+// Components/Pages
+import { HomePage } from "./pages/homepage/homepage.component";
+import { ShopPage } from "./pages/shop/shop.component";
+import { Header } from "./components/header/header.component";
+import { SignInAndUpPage } from "./pages/sign-in-and-up/sign-in-and-up.component";
 
 // const HatsPage = () => {
 //   return <h1>This is hats!!</h1>;
@@ -22,9 +26,11 @@ import "./App.css";
 function App() {
   return (
     <div>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/signin" element={<SignInAndUpPage />} />
 
         {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
       </Routes>

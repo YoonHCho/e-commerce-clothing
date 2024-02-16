@@ -2,3 +2,13 @@ body {
   font-family: 'Open Sans', sans-serif;
   padding: 20px 60px;
 }
+
+.image,
+.background-image {
+  border-radius: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
