@@ -1,3 +1,5 @@
+import { Component } from "react";
+
 // Need to import BrowserRouter in the index.js first
 import { Routes, Route } from "react-router-dom";
 
@@ -8,6 +10,7 @@ import { HomePage } from "./pages/homepage/homepage.component";
 import { ShopPage } from "./pages/shop/shop.component";
 import { Header } from "./components/header/header.component";
 import { SignInAndUpPage } from "./pages/sign-in-and-up/sign-in-and-up.component";
+import { auth } from "./firebase/firebase.utils";
 
 // const HatsPage = () => {
 //   return <h1>This is hats!!</h1>;
@@ -23,19 +26,43 @@ import { SignInAndUpPage } from "./pages/sign-in-and-up/sign-in-and-up.component
 //   return <h1>This is detail</h1>;
 // };
 
-function App() {
-  return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/signin" element={<SignInAndUpPage />} />
+class App extends Component {
+  constructor() {
+    super();
 
-        {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
-      </Routes>
-    </div>
-  );
+    this.state = {
+      currentUser: null,
+    };
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+      console.log(user);
+    });
+  }
+
+  componentWillUnmount() {
+    // at this point, unsubscribeFromAuth holds a reference to the function returned by auth.onAuthStateChanged. By calling it as a function (this.unsubscribeFromAuth()), you invoke the cleanup functionality provided by Firebase, effectively unsubscribing from further authentication state changes.
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/signin" element={<SignInAndUpPage />} />
+
+          {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;
