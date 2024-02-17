@@ -1,7 +1,7 @@
 // import firebase utility library, app - always need this to give access to other utilities when we import them in ex firestore and auth. it will be automatically attached to the firebase keyword
 import { initializeApp } from "firebase/app";
 // database
-// import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, onSnapshot, getDoc, setDoc } from "firebase/firestore";
 // authenticate
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
@@ -15,10 +15,11 @@ const config = {
   measurementId: "G-6WMZ3LCXCN",
 };
 
+// app = firebase
 const app = initializeApp(config);
 
 const auth = getAuth(app);
-// const firestore = getFirestore(firebase);
+const db = getFirestore(app);
 // give access to new google auth provider class from authentication library
 const provider = new GoogleAuthProvider();
 // always trigger google popup when ever we use google auth provider for authentication and sign-in
@@ -26,14 +27,38 @@ provider.setCustomParameters({ prompt: "select_account" });
 // by passing provider, will only look at google sign-in
 const signInWithGoogle = async () => {
   try {
-    return await signInWithPopup(auth, provider);
+    await signInWithPopup(auth, provider);
   } catch (error) {
-    if (error.code === "auth/popup-closed-by-user") {
-      return;
-    } else {
-      console.log("Error signing-in: ", error);
-    }
+    console.log("Error signing-in: ", error);
   }
 };
 
-export { auth, signInWithGoogle };
+const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  const userRef = doc(db, `users/${userAuth.uid}`);
+  const snapShot = await getDoc(userRef);
+
+  console.log("SNAPSHOT.exist: ", snapShot.exists());
+
+  if (!snapShot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(doc(db, `users/${userAuth.uid}`), { displayName, email, createdAt, ...additionalData });
+    } catch (error) {
+      console.log("Error creating a user", error);
+    }
+  }
+  return userRef;
+  // console.log("SNAPSHOT.exist: ", snapShot.exists());
+
+  // doc(DocumentReference) is the object used to perform our CRUD methods, DocuRef returns documentSnapshot object
+  // console.log("firebase.util DOC: ", doc(db, "users/123df"));
+  // collection(CollectionReference) can add collections, CollRef returns a querySnapshot object
+  // console.log("firebase.util COLLECTION: ", collection(db, "users"));
+  // we get the snapshotObject from the referenceObject using the .get() method ex: documentRef.get() or collectionRef.get(), both short named.
+};
+
+export { auth, signInWithGoogle, createUserProfileDocument, onSnapshot };
