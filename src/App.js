@@ -38,7 +38,6 @@ class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    console.log("mounted");
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -49,15 +48,14 @@ class App extends Component {
                 id: snapShot.id,
                 ...snapShot.data(),
               },
-            },
-            () => console.log(this.state)
+            }
+            // () => console.log(this.state)
           );
         });
       } else {
         this.setState({ currentUser: userAuth });
       }
     });
-    console.log(this.state);
   }
 
   componentWillUnmount() {
