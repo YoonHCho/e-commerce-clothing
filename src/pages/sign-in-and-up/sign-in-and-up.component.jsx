@@ -7,6 +7,5 @@ export const SignInAndUpPage = () => (
   <div className="sign-in-and-up">
     <SignIn />
     <SignUp />
-
   </div>
 )
