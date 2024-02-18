@@ -9,6 +9,10 @@
     height: 100%;
     width: 70px;
     padding-left: 25px;
+
+    @media (max-width: 890px) {
+      padding-left: 0;
+    }
   }
 
   .options {
@@ -17,6 +21,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    @media (max-width: 663px) {
+      width: 80%;
+    }
 
     .option {
       padding: 10px 15px;
