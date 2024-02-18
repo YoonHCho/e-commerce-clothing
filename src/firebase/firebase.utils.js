@@ -36,13 +36,8 @@ const signInWithGoogle = async () => {
 const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
-  console.log("userAuth: ", userAuth);
-  console.log("additionalData: ", additionalData);
-
   const userRef = doc(db, `users/${userAuth.uid}`);
   const snapShot = await getDoc(userRef);
-
-  console.log("SNAPSHOT.exist: ", snapShot.exists());
 
   if (!snapShot.exists()) {
     const { displayName, email } = userAuth;

@@ -29,12 +29,8 @@ export class SignUp extends Component {
     }
 
     try {
-      console.log("BEFORE SIGN UP CLICK")
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("AFTER CREATE EMAIL & PASS")
-      console.log("userCredential: ", userCredential)
       const { user } = userCredential;
-      console.log('Create user: ', user);
       await createUserProfileDocument(user, {displayName});
       this.setState({ displayName: '', email: '', password: '', confirmPassword: '', weak: false });
     } catch (error) {
