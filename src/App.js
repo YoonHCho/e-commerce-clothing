@@ -1,7 +1,7 @@
 import { Component } from "react";
 
 // Need to import BrowserRouter in the index.js first
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // use connect (for class component) instead of useSelector, since useSelector is for functional component
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
@@ -56,13 +56,16 @@ class App extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
       <div>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInAndUpPage />} />
+          {/* <Route path="/signin" element={<SignInAndUpPage />} /> */}
+
+          <Route path="/signin" element={currentUser ? <Navigate to="/" replace /> : <SignInAndUpPage />} />
 
           {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
         </Routes>
@@ -71,8 +74,12 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
