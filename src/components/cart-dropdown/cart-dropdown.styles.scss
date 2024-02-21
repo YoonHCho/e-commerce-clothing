@@ -1,10 +1,10 @@
 .cart-dropdown {
   position: absolute;
-  width: 240px;
+  width: 250px;
   height: 340px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   top: 90px;
   right: 40px;
@@ -15,18 +15,10 @@
     height: 240px;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
-  }
-
-  .cart-items::-webkit-scrollbar {
-    display: none;
+    overflow-y: auto;
   }
 
   button {
     margin-top: auto;
   }
 }
-
-// .cart-dropdown::-webkit-scrollbar {
-//   display: none;
-// }
