@@ -5,6 +5,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // use connect (for class component) instead of useSelector, since useSelector is for functional component
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { auth, createUserProfileDocument, onSnapshot } from "./firebase/firebase.utils";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
@@ -13,7 +16,7 @@ import { HomePage } from "./pages/homepage/homepage.component";
 import { ShopPage } from "./pages/shop/shop.component";
 import { Header } from "./components/header/header.component";
 import { SignInAndUpPage } from "./pages/sign-in-and-up/sign-in-and-up.component";
-import { auth, createUserProfileDocument, onSnapshot } from "./firebase/firebase.utils";
+import { CheckoutPage } from "./pages/checkout/checkout.component";
 
 // const HatsPage = () => {
 //   return <h1>This is hats!!</h1>;
@@ -66,6 +69,7 @@ class App extends Component {
           {/* <Route path="/signin" element={<SignInAndUpPage />} /> */}
 
           <Route path="/signin" element={currentUser ? <Navigate to="/" replace /> : <SignInAndUpPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           {/* <Route path="*" element={<Navigate to="/" />}></Route> */}
         </Routes>
@@ -74,8 +78,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

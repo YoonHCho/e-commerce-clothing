@@ -8,9 +8,9 @@ export const CollectionItem = ({ item }) => {
   const { name, price, imageUrl } = item;
   const dispatch = useDispatch();
 
-  const handleAddItem = () => {
-    dispatch(addItem(item));
-  }
+  // const handleAddItem = () => {
+  //   dispatch(addItem(item));
+  // }
 
   return (
     <div className="collection-item">
@@ -24,7 +24,7 @@ export const CollectionItem = ({ item }) => {
         <span className="name">{name}</span>
         <span className="price">${price}</span>
       </div>
-      <CustomButton onClick={handleAddItem} inverted>ADD TO CART</CustomButton>
+      <CustomButton onClick={() => dispatch(addItem(item))} inverted>ADD TO CART</CustomButton>
     </div>
   );
 }
