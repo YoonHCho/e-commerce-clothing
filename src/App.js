@@ -64,8 +64,8 @@ class App extends Component {
       <div>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
+          <Route index path="/" element={<HomePage />} />
+          <Route path="/shop/*" element={<ShopPage />} />
           {/* <Route path="/signin" element={<SignInAndUpPage />} /> */}
 
           <Route path="/signin" element={currentUser ? <Navigate to="/" replace /> : <SignInAndUpPage />} />
