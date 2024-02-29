@@ -56,5 +56,4 @@ export class SignIn extends Component {
       </div>
     )
   }
-
 }

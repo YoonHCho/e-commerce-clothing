@@ -9,7 +9,6 @@ import "./cart-dropdown.styles.scss";
 
 
 export const CartDropdown = () => {
-  // const { cartItems } = useSelector(state => state.cart)
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { cartItems } = useSelector(createStructuredSelector({

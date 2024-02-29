@@ -10,12 +10,6 @@ import { createStructuredSelector } from "reselect";
 
 export const CartIcon = () => {
   const dispatch = useDispatch();
-  // const { cartItems } = useSelector(state => state.cart);
-  // const itemCount = cartItems.reduce((acc, curr) => {
-  //   return acc + curr.quantity;
-  // }, 0);
-
-
 
   // using the memoized selector.
   const { cartItemsCount } = useSelector(createStructuredSelector({
@@ -25,10 +19,6 @@ export const CartIcon = () => {
   const handleToggle = useCallback(() => {
     dispatch(toggleCartHidden());
   }, [dispatch]);
-
-  // const handleToggle = () => {
-  //   dispatch(toggleCartHidden())
-  // }
 
   return (
     <div className="cart-icon" onClick={handleToggle}>

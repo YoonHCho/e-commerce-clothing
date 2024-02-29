@@ -13,16 +13,12 @@ import { selectCurrentUser } from "../../redux/user/user.selector";
 import "./header.styles.scss";
 
 export const Header = () => {
-  // const { currentUser } = useSelector(state => state.user);
-  // const { hidden } = useSelector(state => state.cart);
   const { currentUser, hidden } = useSelector(
     createStructuredSelector({
       currentUser: selectCurrentUser,
       hidden: selectCartHidden
     })
   )
-  // const currentUser = useSelector(selectCurrentUser);
-  // const hidden = useSelector(selectCartHidden);
 
   return (
     <div className="header">

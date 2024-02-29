@@ -51,7 +51,6 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
   }
   return userRef;
   // console.log("SNAPSHOT.exist: ", snapShot.exists());
-
   // doc(DocumentReference) is the object used to perform our CRUD methods, DocuRef returns documentSnapshot object
   // console.log("firebase.util DOC: ", doc(db, "users/123df"));
   // collection(CollectionReference) can add collections, CollRef returns a querySnapshot object
