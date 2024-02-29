@@ -18,20 +18,6 @@ import { Header } from "./components/header/header.component";
 import { SignInAndUpPage } from "./pages/sign-in-and-up/sign-in-and-up.component";
 import { CheckoutPage } from "./pages/checkout/checkout.component";
 
-// const HatsPage = () => {
-//   return <h1>This is hats!!</h1>;
-// };
-// const HatsDetail = props => {
-//   // const nav = useLocation();
-//   // const navigate = useNavigate();
-//   // navigate('/topics');
-//   // const param = useParams();
-//   // console.log("useMatch", useMatch());
-//   // console.log("props.path: ", props.path);
-//   console.log("LOCATION: ", useLocation());
-//   return <h1>This is detail</h1>;
-// };
-
 class App extends Component {
   unsubscribeFromAuth = null;
 
