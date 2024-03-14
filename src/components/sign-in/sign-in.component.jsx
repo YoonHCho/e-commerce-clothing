@@ -33,7 +33,7 @@ export class SignIn extends Component {
       if (error.code === 'auth/invalid-credential') {
         alert("Your email/password doesn't match");
       }
-      console.log(error);
+      console.error(error);
     }
   }
 

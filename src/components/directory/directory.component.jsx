@@ -10,8 +10,6 @@ export const Directory = () => {
     sections: selectDirectorySections
   }));
 
-  console.log(sections)
-
   return (
     <div className="directory-menu">
       {

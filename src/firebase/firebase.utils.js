@@ -29,7 +29,7 @@ const signInWithGoogle = async () => {
   try {
     await signInWithPopup(auth, provider);
   } catch (error) {
-    console.log("Error signing-in: ", error);
+    console.error("Error signing-in: ", error);
   }
 };
 
@@ -46,7 +46,7 @@ const createUserProfileDocument = async (userAuth, additionalData) => {
     try {
       await setDoc(doc(db, `users/${userAuth.uid}`), { displayName, email, createdAt, ...additionalData });
     } catch (error) {
-      console.log("Error creating a user", error);
+      console.error("Error creating a user", error);
     }
   }
   return userRef;

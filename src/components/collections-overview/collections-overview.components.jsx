@@ -9,7 +9,6 @@ export const CollectionsOverview = () => {
   const { collections } = useSelector(createStructuredSelector({
     collections: selectCollectionsForPreview
   }));
-  console.log('collections: ', collections);
 
   return (
     <div className="collections-overview">
